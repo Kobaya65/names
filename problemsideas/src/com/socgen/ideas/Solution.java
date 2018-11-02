@@ -1,6 +1,10 @@
 package com.socgen.ideas;
 
 public class Solution {
+	/*
+	 * @Author
+	 * 
+	 */
 	public static void main(String[] args) {
 		// firstnames with mix of capitalized and non capitalized letters
 		String[] firstname = { "nATHALIE", "sTEVEN", "Léa", "dAVID", "lOUIS", "cYRIL", "pHILIPPE", "alex", "VIKRAM",
@@ -9,11 +13,9 @@ public class Solution {
 		String[] lastname = { "robert", "BeaubruN En FaMILLe DIANt", "limelette", "Dik", "GOdlewSKi", "Da SiLva",
 				"amice", "mokkadem", "RUNGLOLL", "ardelean", "PHONTHIBSVADS", "guilloux", "ANDRIAMALALA", "leclerc",
 				"villepreux", "dennu", "leriC", "luminuku" };
-		//		String firstname[] = { "steven", "Jean-Luc" };
-		//		String lastname[] = { "BeaubruN-En-FaMILLe-DIANt", "Maeckelberghe" };
 
 		// empty String array where to store concatenation of firstname and lastname
-		// dynamic sizing of the arrays according to firstname[] length
+		// dynamic sizing of the arrays according to firstname's length
 		String[] names = new String[firstname.length];
 		// empty string array where to store initials
 		String[] initials = new String[firstname.length];
@@ -32,12 +34,17 @@ public class Solution {
 			// build a string of initials from firstname and lastname
 			initials[i] = BuildInitial(firstname[i]) + " " + BuildInitial(lastname[i]);
 
+			// print data to console
 			System.out.println("Prénom + nom " + String.format("%02d", i + 1) + " : " + names[i]);
 			System.out.println("Initiales    " + String.format("%02d", i + 1) + " : " + initials[i]);
 		}
 	}
 
 	public static String formatFirstname(String firstname) {
+		/*
+		 * Format firstname with capitalized initial(s)
+		 * if composed firstname, each "term" will have its own initial
+		 */
 		// use of stringbuffer for better performance
 		StringBuffer sb = new StringBuffer();
 		// populate stringbuffer with firstname
@@ -60,6 +67,9 @@ public class Solution {
 	}
 
 	public static String formatLastname(String lastname) {
+		/*
+		 * Force the whole lastname to uppercase
+		 */
 		// use of stringbuffer for better performance
 		StringBuffer sb = new StringBuffer();
 		// populate stringbuffer with lastname
@@ -73,10 +83,11 @@ public class Solution {
 
 	public static String BuildInitial(String name) {
 		/*
-		 * Create a string of initials from a firstname or a lastname.
+		 * Create a string of initial(s) from a firstname or a lastname.
+		 * The method takes the first letter of each term in 'name', then add a dot.
 		 * For a composed-name :
-		 *  - the method takes the first letter of each term, and add a dot.
-		 *  - if terms are separated by a dash, replicate the dash in the initials string
+		 * - if terms are dash separated, then initial is preceded by a dash then followed by a dot
+		 * - if terms are space separated, then initial is only followed by a dot
 		 * Examples : Jean NEMARD 		  ==> J. N.
 		 *  		  Paul SAINT-GERMAIN  ==> P. S.-G.
 		 * 			  Pierre Paul JACQUES ==> P.P. J. 
